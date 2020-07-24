@@ -22,3 +22,4 @@ dependencies {
     compileOnly fileTree(dir: 'libs', include: ['*.jar'])
     compileOnly rootProject.ext.designVersion
 }
+apply from: '../maven.gradle'
