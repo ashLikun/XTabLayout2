@@ -60,7 +60,7 @@ public class NoTabOnlyIndicatorExampleActivity extends AppCompatActivity {
             public ITabIndicator createIndicator(Context context) {
                 LineTabIndicator indicator = new LineTabIndicator(context);
                 float lineHeight = context.getResources().getDimension(R.dimen.small_navigator_height);
-                indicator.setLineHeight(lineHeight);
+                indicator.setLineHeight((int) lineHeight);
                 indicator.setColors(Color.parseColor("#40c4ff"));
                 return indicator;
             }

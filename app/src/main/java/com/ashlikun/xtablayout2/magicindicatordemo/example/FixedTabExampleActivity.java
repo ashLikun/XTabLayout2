@@ -170,7 +170,7 @@ public class FixedTabExampleActivity extends AppCompatActivity {
                 float navigatorHeight = context.getResources().getDimension(R.dimen.common_navigator_height);
                 float borderWidth = XTabUtils.dip2px(context, 1);
                 float lineHeight = navigatorHeight - 2 * borderWidth;
-                indicator.setLineHeight(lineHeight);
+                indicator.setLineHeight((int) lineHeight);
                 indicator.setRoundRadius(lineHeight / 2);
                 indicator.setYOffset(borderWidth);
                 indicator.setColors(Color.parseColor("#bc2a2a"));

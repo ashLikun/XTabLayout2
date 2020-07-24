@@ -138,7 +138,7 @@ public class ScrollableTabExampleActivity extends AppCompatActivity {
     private void initMagicIndicator3() {
         XTabLayout magicIndicator = (XTabLayout) findViewById(R.id.magic_indicator3);
         magicIndicator.setBackgroundColor(Color.WHITE);
-        TabCommon tabCommon = XTabLayoutMediator.setupViewPager(magicIndicator, mViewPager, new TabCommonViewPagerAdapter());
+        TabCommon tabCommon = XTabLayoutMediator.setupViewPager(magicIndicator, mViewPager, new TabCommonViewPagerAdapter(mViewPager));
         TabCommonViewPagerAdapter adapter = tabCommon.getAdapter();
         ((LineTabIndicator) adapter.getTabIndicator()).setMode(LineTabIndicator.MODE_WRAP_CONTENT);
     }
@@ -147,10 +147,11 @@ public class ScrollableTabExampleActivity extends AppCompatActivity {
         XTabLayout magicIndicator = (XTabLayout) findViewById(R.id.magic_indicator4);
         magicIndicator.setBackgroundColor(Color.parseColor("#455a64"));
 
-        TabCommon tabCommon = XTabLayoutMediator.setupViewPager(magicIndicator, mViewPager, new TabCommonViewPagerAdapter());
+        TabCommon tabCommon = XTabLayoutMediator.setupViewPager(magicIndicator, mViewPager, new TabCommonViewPagerAdapter(mViewPager));
         TabCommonViewPagerAdapter adapter = tabCommon.getAdapter();
         adapter.setNormalColor(Color.parseColor("#88ffffff"))
                 .setSelectedColor(Color.WHITE)
+                .getLineTabIndicator()
                 .setColors(Color.parseColor("#40c4ff"));
     }
 
@@ -256,7 +257,7 @@ public class ScrollableTabExampleActivity extends AppCompatActivity {
             @Override
             public ITabIndicator createIndicator(Context context) {
                 LineTabIndicator indicator = new LineTabIndicator(context);
-                indicator.setMode(LineTabIndicator.MODE_EXACTLY)
+                indicator.setMode(LineTabIndicator.MODE_WRAP_CONTENT)
                         .setLineHeight(XTabUtils.dip2px(context, 6))
                         .setLineWidth(XTabUtils.dip2px(context, 10))
                         .setRoundRadius(XTabUtils.dip2px(context, 3))

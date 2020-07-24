@@ -32,7 +32,8 @@ public class TabCommonViewPagerAdapter extends TabCommonAdapter {
     //字体缩放，1就是不缩放
     private float mMinScale = 1f;
 
-    public TabCommonViewPagerAdapter() {
+    public TabCommonViewPagerAdapter(Context context) {
+        init(context);
     }
 
     public TabCommonViewPagerAdapter(ViewPager viewPager) {
@@ -45,8 +46,12 @@ public class TabCommonViewPagerAdapter extends TabCommonAdapter {
         viewPagerAdapter = viewPager.getAdapter();
         mTextSize = XTabUtils.dip2px(viewPager.getContext(), 14);
 
+        init(viewPager.getContext());
+    }
+
+    private void init(Context context) {
         if (this.iTabIndicator == null) {
-            this.iTabIndicator = new LineTabIndicator(viewPager.getContext());
+            this.iTabIndicator = new LineTabIndicator(context);
         }
     }
 
@@ -110,16 +115,12 @@ public class TabCommonViewPagerAdapter extends TabCommonAdapter {
         return (T) iTabIndicator;
     }
 
-    public TabCommonViewPagerAdapter setTabIndicator(ITabIndicator iTabIndicator) {
-        this.iTabIndicator = iTabIndicator;
-        return this;
+    public int getTextSize() {
+        return mTextSize;
     }
 
-
-    public TabCommonViewPagerAdapter setIndicatorMode(int mMode) {
-        if (iTabIndicator != null && iTabIndicator instanceof LineTabIndicator) {
-            ((LineTabIndicator) iTabIndicator).setMode(mMode);
-        }
+    public TabCommonViewPagerAdapter setTextSize(int mTextSize) {
+        this.mTextSize = mTextSize;
         return this;
     }
 
@@ -132,17 +133,8 @@ public class TabCommonViewPagerAdapter extends TabCommonAdapter {
         return this;
     }
 
-    public TabCommonViewPagerAdapter setIndicatorColors(Integer... mColors) {
-        if (iTabIndicator != null && iTabIndicator instanceof LineTabIndicator) {
-            ((LineTabIndicator) iTabIndicator).setColors(mColors);
-        }
-        return this;
-    }
-
-    public TabCommonViewPagerAdapter setIndicatorHeight(int height) {
-        if (iTabIndicator != null && iTabIndicator instanceof LineTabIndicator) {
-            ((LineTabIndicator) iTabIndicator).setLineHeight(height);
-        }
+    public TabCommonViewPagerAdapter setTabIndicator(ITabIndicator iTabIndicator) {
+        this.iTabIndicator = iTabIndicator;
         return this;
     }
 
