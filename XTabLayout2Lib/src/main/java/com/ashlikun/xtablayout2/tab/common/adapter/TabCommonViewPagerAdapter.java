@@ -2,12 +2,14 @@ package com.ashlikun.xtablayout2.tab.common.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.ashlikun.xtablayout2.XTabUtils;
 import com.ashlikun.xtablayout2.tab.common.ITabIndicator;
 import com.ashlikun.xtablayout2.tab.common.ITabView;
 import com.ashlikun.xtablayout2.tab.common.indicators.LineTabIndicator;
@@ -26,6 +28,7 @@ public class TabCommonViewPagerAdapter extends TabCommonAdapter {
     ITabIndicator iTabIndicator;
     protected int mSelectedColor = Color.BLACK;
     protected int mNormalColor = Color.GRAY;
+    protected int mTextSize;
     //字体缩放，1就是不缩放
     private float mMinScale = 1f;
 
@@ -40,6 +43,11 @@ public class TabCommonViewPagerAdapter extends TabCommonAdapter {
         this.viewPager = viewPager;
         this.iTabIndicator = iTabIndicator;
         viewPagerAdapter = viewPager.getAdapter();
+        mTextSize = XTabUtils.dip2px(viewPager.getContext(), 14);
+
+        if (this.iTabIndicator == null) {
+            this.iTabIndicator = new LineTabIndicator(viewPager.getContext());
+        }
     }
 
 
@@ -55,16 +63,13 @@ public class TabCommonViewPagerAdapter extends TabCommonAdapter {
         colorTransitionTabView.setNormalColor(mNormalColor);
         colorTransitionTabView.setSelectedColor(mSelectedColor);
         colorTransitionTabView.setText(viewPagerAdapter.getPageTitle(index));
+        colorTransitionTabView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
         return colorTransitionTabView;
     }
 
     @Override
     public ITabIndicator createIndicator(Context context) {
-        if (iTabIndicator == null) {
-            LineTabIndicator linePagerIndicator = new LineTabIndicator(context);
-            linePagerIndicator.setColors(Color.BLACK);
-            iTabIndicator = linePagerIndicator;
-        }
+
         if (iTabIndicator instanceof View) {
             if (((View) iTabIndicator).getParent() != null) {
                 ((ViewGroup) ((View) iTabIndicator).getParent()).removeView((View) iTabIndicator);
@@ -111,7 +116,7 @@ public class TabCommonViewPagerAdapter extends TabCommonAdapter {
     }
 
 
-    public TabCommonViewPagerAdapter setMode(int mMode) {
+    public TabCommonViewPagerAdapter setIndicatorMode(int mMode) {
         if (iTabIndicator != null && iTabIndicator instanceof LineTabIndicator) {
             ((LineTabIndicator) iTabIndicator).setMode(mMode);
         }
@@ -127,9 +132,16 @@ public class TabCommonViewPagerAdapter extends TabCommonAdapter {
         return this;
     }
 
-    public TabCommonViewPagerAdapter setColors(Integer... mColors) {
+    public TabCommonViewPagerAdapter setIndicatorColors(Integer... mColors) {
         if (iTabIndicator != null && iTabIndicator instanceof LineTabIndicator) {
             ((LineTabIndicator) iTabIndicator).setColors(mColors);
+        }
+        return this;
+    }
+
+    public TabCommonViewPagerAdapter setIndicatorHeight(int height) {
+        if (iTabIndicator != null && iTabIndicator instanceof LineTabIndicator) {
+            ((LineTabIndicator) iTabIndicator).setLineHeight(height);
         }
         return this;
     }

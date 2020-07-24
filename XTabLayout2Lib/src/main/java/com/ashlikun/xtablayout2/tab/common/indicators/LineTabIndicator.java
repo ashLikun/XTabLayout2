@@ -36,9 +36,9 @@ public class LineTabIndicator extends View implements ITabIndicator {
     private Interpolator mEndInterpolator = new LinearInterpolator();
 
     private float mYOffset;   // 相对于底部的偏移量，如果你想让直线位于title上方，设置它即可
-    private float mLineHeight;
+    private int mLineHeight;
     private float mXOffset;
-    private float mLineWidth;
+    private int mLineWidth;
     private float mRoundRadius;
 
     private Paint mPaint;
@@ -55,7 +55,7 @@ public class LineTabIndicator extends View implements ITabIndicator {
     private void init(Context context) {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.FILL);
-        mLineHeight = XTabUtils.dip2px(context, 3);
+        mLineHeight = XTabUtils.dip2px(context, 2);
         mLineWidth = XTabUtils.dip2px(context, 10);
     }
 
@@ -146,7 +146,7 @@ public class LineTabIndicator extends View implements ITabIndicator {
         return mLineHeight;
     }
 
-    public LineTabIndicator setLineHeight(float lineHeight) {
+    public LineTabIndicator setLineHeight(int lineHeight) {
         mLineHeight = lineHeight;
         return this;
     }
@@ -155,7 +155,7 @@ public class LineTabIndicator extends View implements ITabIndicator {
         return mLineWidth;
     }
 
-    public LineTabIndicator setLineWidth(float lineWidth) {
+    public LineTabIndicator setLineWidth(int lineWidth) {
         mLineWidth = lineWidth;
         return this;
     }
