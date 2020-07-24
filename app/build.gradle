@@ -32,3 +32,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     api rootProject.ext.designVersion
 }
+repositories {
+    mavenCentral()
+}
