@@ -20,6 +20,7 @@ import com.ashlikun.xtablayout2.tab.common.TabCommon;
 public abstract class TabCommonAdapter {
 
     private final DataSetObservable mDataSetObservable = new DataSetObservable();
+    private OnTabItemClickListener onTabItemClickListener = null;
 
     public abstract int getCount();
 
@@ -61,6 +62,16 @@ public abstract class TabCommonAdapter {
     }
 
     public void onItemClick(ITabView view, int index) {
+        if (onTabItemClickListener != null) {
+            onTabItemClickListener.onItemClick(view, index);
+        }
+    }
 
+    public void setOnTabItemClickListener(OnTabItemClickListener onTabItemClickListener) {
+        this.onTabItemClickListener = onTabItemClickListener;
+    }
+
+    public interface OnTabItemClickListener {
+        public void onItemClick(ITabView view, int index);
     }
 }
