@@ -21,6 +21,7 @@ public abstract class TabCommonAdapter {
 
     private final DataSetObservable mDataSetObservable = new DataSetObservable();
     private OnTabItemClickListener onTabItemClickListener = null;
+    private OnCreateTabViewListener onCreateTabViewListener = null;
 
     public abstract int getCount();
 
@@ -49,7 +50,7 @@ public abstract class TabCommonAdapter {
     }
 
     public ITabView bindTabView(Context context, final int index) {
-        final ITabView view = createTabView(context, index);
+        final ITabView view = onCreateTabViewListener == null ? createTabView(context, index) : onCreateTabViewListener.createTabView(context, index);
         if (view instanceof View) {
             ((View) view).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -71,7 +72,19 @@ public abstract class TabCommonAdapter {
         this.onTabItemClickListener = onTabItemClickListener;
     }
 
+    public void setOnCreateTabViewListener(OnCreateTabViewListener onCreateTabViewListener) {
+        this.onCreateTabViewListener = onCreateTabViewListener;
+    }
+
+    public OnCreateTabViewListener getOnCreateTabViewListener() {
+        return onCreateTabViewListener;
+    }
+
     public interface OnTabItemClickListener {
         public void onItemClick(ITabView view, int index);
+    }
+
+    public interface OnCreateTabViewListener {
+        public ITabView createTabView(Context context, int index);
     }
 }
